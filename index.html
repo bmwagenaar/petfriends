@@ -296,6 +296,13 @@
             justify-content: center;
             font-size: 5rem;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .profile-info-main {
@@ -349,6 +356,74 @@
             color: #6B5444;
             line-height: 1.8;
             font-size: 1.05rem;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-photo {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(200, 121, 65, 0.3);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 2rem;
+            color: #4A3728;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .lightbox-close:hover {
+            background: #F5E6D3;
         }
 
         .contact-btn {
@@ -781,11 +856,17 @@
         </div>
     </div>
 
+    <!-- Lightbox for Full-Size Photos -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img id="lightboxImage" src="" alt="Full size photo">
+    </div>
+
     <script>
         // ============================================
         // IMPORTANT: ADD YOUR GOOGLE APPS SCRIPT URL HERE
         // ============================================
-        const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwuEGCFKKbPd0_2M1Hpy1zS85o9LwAjMq2Ll2jXtLpOoFkugSbiohO5ia8z0R6FIe4D/exec';
+        const SHEET_API_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
         
         // Global variables
         let allSitters = [];
@@ -867,10 +948,15 @@
                     `<span class="detail-tag">${getServiceEmoji(service)} ${service}</span>`
                 ).join('');
                 
+                // Use profile photo if available, otherwise use emoji
+                const imageContent = sitter.profilePhoto ? 
+                    `<img src="${sitter.profilePhoto}" alt="${sitter.name}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                    `<span>${sitter.emoji || '👤'}</span>`;
+                
                 return `
                     <div class="sitter-card" onclick="showProfile(${index})">
                         <div class="sitter-image">
-                            <span>${sitter.emoji || '👤'}</span>
+                            ${imageContent}
                             ${sitter.verified === 'yes' ? '<span class="verified-badge">✓ Verified</span>' : ''}
                         </div>
                         <div class="sitter-info">
@@ -894,11 +980,32 @@
                 `<span class="detail-tag">${getServiceEmoji(service)} ${service}</span>`
             ).join('');
             
+            // Profile image - use photo if available, otherwise emoji
+            const profileImageContent = sitter.profilePhoto ?
+                `<img src="${sitter.profilePhoto}" alt="${sitter.name}">` :
+                `<span>${sitter.emoji || '👤'}</span>`;
+            
+            // Collect all additional photos
+            const additionalPhotos = [sitter.photo1, sitter.photo2, sitter.photo3]
+                .filter(photo => photo && photo.trim() !== '');
+            
+            // Create photo gallery HTML
+            const photoGalleryHtml = additionalPhotos.length > 0 ? `
+                <div class="section">
+                    <h3>📸 Photos</h3>
+                    <div class="photo-gallery">
+                        ${additionalPhotos.map(photo => 
+                            `<img src="${photo}" alt="${sitter.name}'s space" class="gallery-photo" onclick="openLightbox('${photo}')">`
+                        ).join('')}
+                    </div>
+                </div>
+            ` : '';
+            
             document.getElementById('profileContent').innerHTML = `
                 <div class="profile-hero">
                     <div class="profile-header">
                         <div class="profile-image">
-                            <span>${sitter.emoji || '👤'}</span>
+                            ${profileImageContent}
                         </div>
                         <div class="profile-info-main">
                             <h1 class="profile-name">${sitter.name} ${sitter.verified === 'yes' ? '<span style="color: #4CAF50; font-size: 0.7em;">✓</span>' : ''}</h1>
@@ -934,6 +1041,8 @@
                     <h3>✨ About ${sitter.name.split(' ')[0]}</h3>
                     <p class="about-text">${sitter.bio}</p>
                 </div>
+
+                ${photoGalleryHtml}
 
                 <div class="section">
                     <button class="contact-btn" onclick="showModal()">Send ${sitter.name.split(' ')[0]} a Message 💌</button>
@@ -1009,6 +1118,16 @@
             if (event.target == modal) {
                 closeModal();
             }
+        }
+
+        // Lightbox Functions
+        function openLightbox(imageSrc) {
+            document.getElementById('lightboxImage').src = imageSrc;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
         }
 
         // Load sitters on page load
