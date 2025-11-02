@@ -1629,8 +1629,13 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="dates">When do you need care?</label>
-                    <input type="text" id="dates" placeholder="e.g., 15-20 Dec 2024" required>
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="endDate">End Date</label>
+                    <input type="date" id="endDate" required>
                 </div>
                 
                 <div class="form-group">
@@ -1907,12 +1912,30 @@
             const name = document.getElementById('ownerName').value;
             const phone = document.getElementById('ownerPhone').value;
             const petName = document.getElementById('petName').value;
-            const dates = document.getElementById('dates').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
             const message = document.getElementById('message').value;
+
+            // Validate that end date is after start date
+            if (new Date(endDate) < new Date(startDate)) {
+                alert('End date must be after start date!');
+                return false;
+            }
+
+            // Format dates nicely for WhatsApp message
+            const formatDate = (dateString) => {
+                const date = new Date(dateString);
+                const options = { day: 'numeric', month: 'short', year: 'numeric' };
+                return date.toLocaleDateString('en-GB', options);
+            };
+
+            const formattedStartDate = formatDate(startDate);
+            const formattedEndDate = formatDate(endDate);
+            const dateRange = `${formattedStartDate} - ${formattedEndDate}`;
 
             // Create WhatsApp message
             const whatsappNumber = currentSitter.whatsapp;
-            const whatsappMessage = `Hi ${currentSitter.name.split(' ')[0]}! I'm ${name} and my pet ${petName} needs care from ${dates}. ${message}`;
+            const whatsappMessage = `Hi ${currentSitter.name.split(' ')[0]}! I'm ${name} and my pet ${petName} needs care from ${dateRange}. ${message}`;
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
             
             // Open WhatsApp
@@ -1927,11 +1950,43 @@
             document.getElementById('ownerName').value = '';
             document.getElementById('ownerPhone').value = '';
             document.getElementById('petName').value = '';
-            document.getElementById('dates').value = '';
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
             document.getElementById('message').value = '';
             
             return false;
         }
+
+        // Set minimum date to today for date pickers
+        function setMinimumDates() {
+            const today = new Date().toISOString().split('T')[0];
+            const startDateInput = document.getElementById('startDate');
+            const endDateInput = document.getElementById('endDate');
+            
+            if (startDateInput) {
+                startDateInput.setAttribute('min', today);
+            }
+            if (endDateInput) {
+                endDateInput.setAttribute('min', today);
+            }
+
+            // Update end date minimum when start date changes
+            if (startDateInput) {
+                startDateInput.addEventListener('change', function() {
+                    endDateInput.setAttribute('min', this.value);
+                    // If end date is before new start date, clear it
+                    if (endDateInput.value && endDateInput.value < this.value) {
+                        endDateInput.value = '';
+                    }
+                });
+            }
+        }
+
+        // Call on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSitters();
+            setMinimumDates();
+        });
 
         // Close modal when clicking outside
         window.onclick = function(event) {
@@ -1950,11 +2005,6 @@
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
         }
-
-        // Load sitters on page load
-        window.addEventListener('DOMContentLoaded', () => {
-            loadSitters();
-        });
 
         // Handle Join Form Submission to Google Forms
         function handleJoinSubmit(event) {
