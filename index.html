@@ -6,7 +6,7 @@
     <title>Pet Friends - Your pet's second favourite home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,16 +16,16 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: #FFFBF5;
-            color: #3A2F28;
+            background-color: #FAFCFC;
+            color: #2C3E3E;
             line-height: 1.6;
         }
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #C87941 0%, #E89B6D 50%, #C87941 100%);
+            background: linear-gradient(135deg, #26A69A 0%, #1C7A71 50%, #26A69A 100%);
             padding: 1.25rem 2rem;
-            box-shadow: 0 4px 20px rgba(200, 121, 65, 0.15);
+            box-shadow: 0 4px 20px rgba(38, 166, 154, 0.15);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -56,7 +56,7 @@
             color: white;
             font-size: 1.75rem;
             font-weight: 800;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             letter-spacing: -0.5px;
         }
 
@@ -72,21 +72,33 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(165deg, #FFE5D9 0%, #FFF5EE 50%, #FFFBF5 100%);
-            padding: 5rem 2rem 4rem;
+            background-image: 
+                linear-gradient(135deg, rgba(38, 166, 154, 0.85) 0%, rgba(28, 122, 113, 0.88) 100%),
+                url('https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 5rem 2rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
         .hero::before {
-            content: '🐾';
+            content: '';
             position: absolute;
-            font-size: 15rem;
-            opacity: 0.03;
-            top: -5rem;
-            right: -5rem;
-            animation: float 6s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.03) 2px,
+                rgba(255, 255, 255, 0.03) 4px
+            );
+            pointer-events: none;
         }
 
         @keyframes float {
@@ -99,17 +111,19 @@
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            padding-bottom: 4rem;
         }
 
         .hero h2 {
-            color: #C87941;
-            font-size: 3.25rem;
+            color: white;
+            font-size: 3.5rem;
             font-weight: 800;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             margin-bottom: 1.25rem;
             line-height: 1.15;
             letter-spacing: -1.5px;
             animation: fadeInUp 0.8s ease;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
         }
 
         @keyframes fadeInUp {
@@ -125,10 +139,11 @@
 
         .hero p {
             font-size: 1.25rem;
-            color: #6B5444;
+            color: rgba(255, 255, 255, 0.97);
             margin-bottom: 3rem;
             font-weight: 500;
             animation: fadeInUp 0.8s ease 0.2s backwards;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
         }
 
         /* Search Box */
@@ -136,25 +151,34 @@
             background: white;
             padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(200, 121, 65, 0.12);
+            box-shadow: 0 20px 60px rgba(38, 166, 154, 0.12);
             max-width: 750px;
             margin: 0 auto;
             animation: fadeInUp 0.8s ease 0.6s backwards;
-            border: 1px solid rgba(200, 121, 65, 0.08);
+            border: 1px solid rgba(38, 166, 154, 0.08);
         }
 
         /* Features Section */
         .features-section {
+            background-image: 
+                linear-gradient(135deg, rgba(38, 166, 154, 0.85) 0%, rgba(28, 122, 113, 0.88) 100%),
+                url('https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 5rem 2rem;
+        }
+
+        .features-section-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 4rem 2rem 5rem;
         }
 
         /* Join Community Section */
         .join-section {
-            background: linear-gradient(135deg, #F0E5D8 0%, #FFE5D9 100%);
+            background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
             padding: 5rem 2rem;
-            margin-top: 3rem;
+            margin: 0;
         }
 
         .join-content {
@@ -164,17 +188,17 @@
         }
 
         .join-title {
-            color: #C87941;
+            color: #26A69A;
             font-size: 2.75rem;
             font-weight: 800;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             margin-bottom: 1.5rem;
             letter-spacing: -1px;
             animation: fadeInUp 0.6s ease;
         }
 
         .join-description {
-            color: #6B5444;
+            color: #5A7876;
             font-size: 1.15rem;
             line-height: 1.7;
             margin-bottom: 2.5rem;
@@ -184,6 +208,7 @@
 
         .join-form {
             display: flex;
+            flex-direction: column;
             gap: 1rem;
             max-width: 600px;
             margin: 0 auto 1.5rem;
@@ -193,7 +218,7 @@
         .join-input {
             flex: 1;
             padding: 1.125rem 1.5rem;
-            border: 2px solid rgba(200, 121, 65, 0.2);
+            border: 2px solid rgba(38, 166, 154, 0.2);
             border-radius: 50px;
             font-size: 1rem;
             font-family: 'Inter', sans-serif;
@@ -203,33 +228,34 @@
 
         .join-input:focus {
             outline: none;
-            border-color: #C87941;
-            box-shadow: 0 4px 20px rgba(200, 121, 65, 0.15);
+            border-color: #26A69A;
+            box-shadow: 0 4px 20px rgba(38, 166, 154, 0.15);
         }
 
         .join-input::placeholder {
-            color: #B5A89A;
+            color: #A0B5B3;
         }
 
         .join-btn {
-            background: linear-gradient(135deg, #C87941 0%, #E89B6D 100%);
+            background: linear-gradient(135deg, #26A69A 0%, #1C7A71 100%);
             color: white;
             border: none;
-            padding: 1.125rem 2.5rem;
+            padding: 1rem 2.5rem;
             font-size: 1.125rem;
             font-weight: 700;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            white-space: nowrap;
-            box-shadow: 0 4px 15px rgba(200, 121, 65, 0.3);
-            min-width: 140px;
+            box-shadow: 0 4px 15px rgba(38, 166, 154, 0.3);
+            width: auto;
+            align-self: center;
+            min-width: 160px;
         }
 
         .join-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(200, 121, 65, 0.4);
+            box-shadow: 0 8px 30px rgba(38, 166, 154, 0.4);
         }
 
         .join-btn:disabled {
@@ -254,7 +280,7 @@
         }
 
         .join-disclaimer {
-            color: #8B7D70;
+            color: #5A7876;
             font-size: 0.95rem;
             font-style: italic;
             animation: fadeInUp 0.6s ease 0.3s backwards;
@@ -271,7 +297,7 @@
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(76, 175, 80, 0.4);
             font-weight: 600;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             display: none;
             align-items: center;
             gap: 0.75rem;
@@ -309,7 +335,7 @@
             background: white;
             padding: 3rem 2.5rem;
             border-radius: 24px;
-            border: 2px solid rgba(200, 121, 65, 0.12);
+            border: 2px solid rgba(38, 166, 154, 0.12);
             text-align: center;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             animation: fadeInUp 0.6s ease backwards;
@@ -321,8 +347,8 @@
 
         .feature-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(200, 121, 65, 0.15);
-            border-color: rgba(200, 121, 65, 0.3);
+            box-shadow: 0 12px 40px rgba(38, 166, 154, 0.15);
+            border-color: rgba(38, 166, 154, 0.3);
         }
 
         .feature-icon {
@@ -341,16 +367,16 @@
         }
 
         .feature-title {
-            color: #C87941;
+            color: #26A69A;
             font-size: 1.75rem;
             font-weight: 700;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             margin-bottom: 1rem;
             letter-spacing: -0.5px;
         }
 
         .feature-description {
-            color: #6B5444;
+            color: #5A7876;
             font-size: 1.05rem;
             line-height: 1.7;
             font-weight: 500;
@@ -368,7 +394,7 @@
         }
 
         .form-group label {
-            color: #3A2F28;
+            color: #2C3E3E;
             font-weight: 600;
             margin-bottom: 0.625rem;
             font-size: 0.95rem;
@@ -380,41 +406,41 @@
         .form-group input,
         .form-group select {
             padding: 1rem 1.25rem;
-            border: 2px solid #F0E5D8;
+            border: 2px solid #E0F2F1;
             border-radius: 12px;
             font-size: 1rem;
             font-family: 'Inter', sans-serif;
             transition: all 0.3s ease;
-            background: #FFFBF5;
+            background: #FAFCFC;
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #C87941;
+            border-color: #26A69A;
             background: white;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(200, 121, 65, 0.1);
+            box-shadow: 0 8px 20px rgba(38, 166, 154, 0.1);
         }
 
         .search-btn {
-            background: linear-gradient(135deg, #C87941 0%, #E89B6D 100%);
+            background: linear-gradient(135deg, #26A69A 0%, #1C7A71 100%);
             color: white;
             border: none;
             padding: 1.125rem 2.5rem;
             font-size: 1.125rem;
             font-weight: 700;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 1rem;
-            box-shadow: 0 4px 15px rgba(200, 121, 65, 0.3);
+            box-shadow: 0 4px 15px rgba(38, 166, 154, 0.3);
         }
 
         .search-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(200, 121, 65, 0.4);
+            box-shadow: 0 8px 30px rgba(38, 166, 154, 0.4);
         }
 
         .search-btn:active {
@@ -425,7 +451,7 @@
         .loading {
             text-align: center;
             padding: 4rem;
-            color: #C87941;
+            color: #26A69A;
             font-size: 1.25rem;
             font-weight: 600;
         }
@@ -435,7 +461,7 @@
             background: white;
             padding: 2.5rem 2rem;
             box-shadow: 0 2px 20px rgba(0,0,0,0.03);
-            border-bottom: 1px solid #F0E5D8;
+            border-bottom: 1px solid #E0F2F1;
         }
 
         .results-header-content {
@@ -444,16 +470,16 @@
         }
 
         .results-header h2 {
-            color: #C87941;
+            color: #26A69A;
             font-size: 2rem;
             font-weight: 800;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             margin-bottom: 0.625rem;
             letter-spacing: -0.5px;
         }
 
         .results-count {
-            color: #6B5444;
+            color: #5A7876;
             font-size: 1.05rem;
             font-weight: 500;
         }
@@ -478,7 +504,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            border: 1px solid rgba(200, 121, 65, 0.08);
+            border: 1px solid rgba(38, 166, 154, 0.08);
             animation: fadeInScale 0.6s ease backwards;
         }
 
@@ -499,13 +525,13 @@
 
         .sitter-card:hover {
             transform: translateY(-12px);
-            box-shadow: 0 20px 50px rgba(200, 121, 65, 0.18);
+            box-shadow: 0 20px 50px rgba(38, 166, 154, 0.18);
         }
 
         .sitter-image {
             width: 100%;
             height: 260px;
-            background: linear-gradient(135deg, #F0E5D8 0%, #FFE5D9 100%);
+            background: linear-gradient(135deg, #E0F2F1 0%, #E0F2F1 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -514,12 +540,17 @@
             overflow: hidden;
         }
 
+        /* Image positioning optimized to show faces - positions image slightly up (30% from top) */
         .sitter-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
             transition: transform 0.4s ease;
         }
 
         .sitter-card:hover .sitter-image img {
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
 
         .verified-badge {
@@ -543,16 +574,16 @@
         }
 
         .sitter-name {
-            color: #C87941;
+            color: #26A69A;
             font-size: 1.5rem;
             font-weight: 700;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             margin-bottom: 0.5rem;
             letter-spacing: -0.3px;
         }
 
         .sitter-location {
-            color: #6B5444;
+            color: #5A7876;
             font-size: 0.95rem;
             margin-bottom: 1.25rem;
             display: flex;
@@ -569,28 +600,28 @@
         }
 
         .detail-tag {
-            background: linear-gradient(135deg, #FFE5D9 0%, #FFF5EE 100%);
-            color: #C87941;
+            background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
+            color: #26A69A;
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid rgba(200, 121, 65, 0.15);
+            border: 1px solid rgba(38, 166, 154, 0.15);
             transition: all 0.3s ease;
         }
 
         .detail-tag:hover {
-            background: linear-gradient(135deg, #C87941 0%, #E89B6D 100%);
+            background: linear-gradient(135deg, #26A69A 0%, #1C7A71 100%);
             color: white;
             transform: translateY(-2px);
         }
 
         .sitter-rate {
-            color: #C87941;
+            color: #26A69A;
             font-weight: 800;
             font-size: 1.25rem;
             margin-top: 1.25rem;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
         }
 
         /* Profile Page */
@@ -606,7 +637,7 @@
             padding: 3rem;
             box-shadow: 0 8px 40px rgba(0,0,0,0.06);
             margin-bottom: 2rem;
-            border: 1px solid rgba(200, 121, 65, 0.08);
+            border: 1px solid rgba(38, 166, 154, 0.08);
             animation: fadeInUp 0.6s ease;
         }
 
@@ -621,7 +652,7 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #F0E5D8 0%, #FFE5D9 100%);
+            background: linear-gradient(135deg, #E0F2F1 0%, #E0F2F1 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -629,13 +660,14 @@
             flex-shrink: 0;
             overflow: hidden;
             border: 4px solid white;
-            box-shadow: 0 8px 30px rgba(200, 121, 65, 0.15);
+            box-shadow: 0 8px 30px rgba(38, 166, 154, 0.15);
         }
 
         .profile-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center 35%;
         }
 
         .profile-info-main {
@@ -643,10 +675,10 @@
         }
 
         .profile-name {
-            color: #C87941;
+            color: #26A69A;
             font-size: 2.75rem;
             font-weight: 800;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             margin-bottom: 0.625rem;
             letter-spacing: -1px;
             line-height: 1.1;
@@ -662,21 +694,21 @@
         .stat {
             text-align: center;
             padding: 1.25rem 2rem;
-            background: linear-gradient(135deg, #FFE5D9 0%, #FFF5EE 100%);
+            background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
             border-radius: 16px;
-            border: 1px solid rgba(200, 121, 65, 0.1);
+            border: 1px solid rgba(38, 166, 154, 0.1);
         }
 
         .stat-number {
-            color: #C87941;
+            color: #26A69A;
             font-size: 2.25rem;
             font-weight: 800;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             line-height: 1;
         }
 
         .stat-label {
-            color: #6B5444;
+            color: #5A7876;
             font-size: 0.9rem;
             margin-top: 0.5rem;
             font-weight: 600;
@@ -688,15 +720,15 @@
             padding: 2.5rem;
             margin-bottom: 2rem;
             box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            border: 1px solid rgba(200, 121, 65, 0.08);
+            border: 1px solid rgba(38, 166, 154, 0.08);
             animation: fadeInUp 0.6s ease;
         }
 
         .section h3 {
-            color: #C87941;
+            color: #26A69A;
             font-size: 1.75rem;
             font-weight: 700;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
@@ -705,7 +737,7 @@
         }
 
         .about-text {
-            color: #6B5444;
+            color: #5A7876;
             line-height: 1.8;
             font-size: 1.05rem;
         }
@@ -719,39 +751,41 @@
 
         .gallery-photo {
             width: 100%;
-            height: 220px;
+            height: 280px;
             border-radius: 16px;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
             cursor: pointer;
             transition: all 0.4s ease;
             border: 2px solid transparent;
+            background: #F5F5F5;
         }
 
         .gallery-photo:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: 0 12px 35px rgba(200, 121, 65, 0.25);
-            border-color: #C87941;
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(38, 166, 154, 0.25);
+            border-color: #26A69A;
         }
 
         .contact-btn {
             width: 100%;
-            background: linear-gradient(135deg, #C87941 0%, #E89B6D 100%);
+            background: linear-gradient(135deg, #26A69A 0%, #1C7A71 100%);
             color: white;
             border: none;
             padding: 1.375rem 2.5rem;
             font-size: 1.25rem;
             font-weight: 700;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             border-radius: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 1.25rem;
-            box-shadow: 0 6px 25px rgba(200, 121, 65, 0.3);
+            box-shadow: 0 6px 25px rgba(38, 166, 154, 0.3);
         }
 
         .contact-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(200, 121, 65, 0.4);
+            box-shadow: 0 10px 40px rgba(38, 166, 154, 0.4);
         }
 
         /* Modal */
@@ -808,13 +842,13 @@
             position: absolute;
             top: 1.25rem;
             right: 1.25rem;
-            background: #FFE5D9;
+            background: #E0F2F1;
             border: none;
             width: 40px;
             height: 40px;
             border-radius: 50%;
             font-size: 1.5rem;
-            color: #C87941;
+            color: #26A69A;
             cursor: pointer;
             line-height: 1;
             transition: all 0.3s ease;
@@ -824,22 +858,22 @@
         }
 
         .modal-close:hover {
-            background: #C87941;
+            background: #26A69A;
             color: white;
             transform: rotate(90deg);
         }
 
         .modal h3 {
-            color: #C87941;
+            color: #26A69A;
             font-size: 2rem;
             font-weight: 800;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             margin-bottom: 1rem;
             letter-spacing: -0.5px;
         }
 
         .modal p {
-            color: #6B5444;
+            color: #5A7876;
             margin-bottom: 2rem;
             font-size: 1.05rem;
         }
@@ -882,7 +916,7 @@
             height: 56px;
             border-radius: 50%;
             font-size: 2rem;
-            color: #3A2F28;
+            color: #2C3E3E;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -892,7 +926,7 @@
         }
 
         .lightbox-close:hover {
-            background: #FFE5D9;
+            background: #E0F2F1;
             transform: scale(1.1) rotate(90deg);
         }
 
@@ -901,22 +935,22 @@
             display: inline-flex;
             align-items: center;
             gap: 0.625rem;
-            color: #C87941;
+            color: #26A69A;
             text-decoration: none;
             font-weight: 700;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Raleway', sans-serif;
             margin-bottom: 2rem;
             transition: all 0.3s ease;
             font-size: 1rem;
             padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, #FFE5D9 0%, #FFF5EE 100%);
+            background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 100%);
             border-radius: 12px;
-            border: 1px solid rgba(200, 121, 65, 0.15);
+            border: 1px solid rgba(38, 166, 154, 0.15);
         }
 
         .back-btn:hover {
             gap: 1rem;
-            background: linear-gradient(135deg, #C87941 0%, #E89B6D 100%);
+            background: linear-gradient(135deg, #26A69A 0%, #1C7A71 100%);
             color: white;
             transform: translateX(-5px);
         }
@@ -963,7 +997,11 @@
             }
 
             .hero {
-                padding: 3rem 1.5rem 2.5rem;
+                padding: 3rem 1.5rem 0;
+            }
+
+            .hero-content {
+                padding-bottom: 2.5rem;
             }
 
             .hero h2 {
@@ -1009,18 +1047,12 @@
                 line-height: 1.6;
             }
 
-            .join-form {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
             .join-input {
                 padding: 1rem 1.25rem;
                 font-size: 0.95rem;
             }
 
             .join-btn {
-                width: 100%;
                 padding: 1rem 2rem;
                 font-size: 1rem;
             }
@@ -1178,7 +1210,7 @@
             }
 
             .gallery-photo {
-                height: 200px;
+                height: 240px;
             }
 
             .contact-btn {
@@ -1368,13 +1400,17 @@
         <section class="hero">
             <div class="hero-content">
                 <h2>Your pet's second favourite home</h2>
-                <p>Because they deserve belly rubs and treats while you're away (and so do you deserve peace of mind!)</p>
+                <p>Because belly rubs shouldn't stop when you're gone - and peace of mind shouldn't be hard to find.</p>
                 
                 <div class="search-container">
                     <form class="search-form" onsubmit="return handleSearch(event);">
                         <div class="form-group">
                             <label for="location">📍 Your home suburb</label>
-                            <input type="text" id="location" placeholder="e.g., Claremont, Cape Town" required>
+                            <select id="location" required>
+                                <option value="">Select your area</option>
+                                <option value="blouberg">Blouberg and surrounds, Western Cape</option>
+                                <option value="milnerton">Milnerton, Western Cape</option>
+                            </select>
                         </div>
                         
                         <div class="form-group">
@@ -1392,14 +1428,14 @@
                             <label for="service">🏡 What kind of pet care?</label>
                             <select id="service" required>
                                 <option value="">Select service</option>
-                                <option value="boarding">Boarding (sleepover party!)</option>
-                                <option value="daycare">Daycare (playtime galore)</option>
-                                <option value="visits">Home Visits (quick hello)</option>
-                                <option value="walking">Dog Walking (sniff expedition)</option>
+                                <option value="pet-sitting">Pet Sitting (sitter stays at your home)</option>
+                                <option value="boarding">Boarding (pets stay at sitter's home)</option>
+                                <option value="daycare">Daycare (daytime at sitter's home)</option>
+                                <option value="visits">Home Visits (check-ins at your home)</option>
                             </select>
                         </div>
                         
-                        <button type="submit" class="search-btn">Find My Pet's New BFF 🐾</button>
+                        <button type="submit" class="search-btn">Find Your Pet's New BFF 🐾</button>
                     </form>
                 </div>
             </div>
@@ -1435,26 +1471,26 @@
         </section>
 
         <section class="features-section">
-            <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">🤝</div>
-                            <h3 class="feature-title">Trusted Pet Lovers</h3>
-                            <p class="feature-description">Connect with verified pet lovers in your community</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">🏡</div>
-                            <h3 class="feature-title">Home Environment</h3>
-                            <p class="feature-description">Your pet stays comfortable in a loving home setting</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">📱</div>
-                            <h3 class="feature-title">Easy Booking</h3>
-                            <p class="feature-description">Book directly with pet carers to suit your schedule</p>
-                        </div>
+            <div class="features-section-content">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3 class="feature-title">Trusted Pet Lovers</h3>
+                        <p class="feature-description">Connect with verified pet lovers in your community</p>
                     </div>
-                </section>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🏡</div>
+                        <h3 class="feature-title">Home Environment</h3>
+                        <p class="feature-description">Your pet stays comfortable in a loving home setting</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3 class="feature-title">Easy Booking</h3>
+                        <p class="feature-description">Book directly with pet carers to suit your schedule</p>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -1523,7 +1559,7 @@
                 
                 <div class="form-group">
                     <label for="message">Tell the sitter about your pet (personality, quirks, special needs...)</label>
-                    <textarea id="message" rows="4" style="padding: 1rem 1.25rem; border: 2px solid #F0E5D8; border-radius: 12px; font-size: 1rem; font-family: inherit; resize: vertical; background: #FFFBF5;" placeholder="e.g., Max is a 3-year-old Labrador who loves fetch, scared of thunderstorms, and thinks he's a lapdog despite being 30kg..." required></textarea>
+                    <textarea id="message" rows="4" style="padding: 1rem 1.25rem; border: 2px solid #E0F2F1; border-radius: 12px; font-size: 1rem; font-family: inherit; resize: vertical; background: #FAFCFC;" placeholder="e.g., Max is a 3-year-old Labrador who loves fetch, scared of thunderstorms, and thinks he's a lapdog despite being 30kg..." required></textarea>
                 </div>
                 
                 <button type="submit" class="search-btn" style="margin-top: 0.5rem;">Send Message via WhatsApp 📱</button>
@@ -1636,7 +1672,7 @@
                 
                 // Use profile photo if available, otherwise use emoji
                 const imageContent = sitter.profilePhoto && sitter.profilePhoto.trim() !== '' ? 
-                    `<img src="${sitter.profilePhoto}" alt="${sitter.name}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                    `<img src="${sitter.profilePhoto}" alt="${sitter.name}" style="width: 100%; height: 100%; object-fit: cover; object-position: center 30%;">` :
                     `<span>${sitter.emoji || '👤'}</span>`;
                 
                 // Ensure we have values for display
@@ -1658,7 +1694,7 @@
                             <div class="sitter-details">
                                 ${servicesTags}
                             </div>
-                            <p style="color: #6B5444; font-size: 0.95rem;">${displayBio}</p>
+                            <p style="color: #5A7876; font-size: 0.95rem;">${displayBio}</p>
                             <div class="sitter-rate">${displayRates}</div>
                         </div>
                     </div>
@@ -1755,7 +1791,7 @@
 
                 <div class="section">
                     <button class="contact-btn" onclick="showModal()">Send ${displayName.split(' ')[0]} a Message 💌</button>
-                    <p style="text-align: center; color: #6B5444; margin-top: 1rem; font-size: 0.9rem;">
+                    <p style="text-align: center; color: #5A7876; margin-top: 1rem; font-size: 0.9rem;">
                         We'll send your message via WhatsApp so you can chat directly!
                     </p>
                 </div>
