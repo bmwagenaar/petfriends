@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - MyPetFriends</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #FFB6C1;
+            --pink-hover: #FF9FB0;
+            --blue: #A8D8EA;
+            --sage: #B8D4B8;
+            --cream: #FFF5E6;
+            --white: #FFFFFF;
+            --dark-gray: #2C2C2C;
+            --medium-gray: #555555;
+            --light-gray: #999999;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--white);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+
+        /* Header */
+        header {
+            background: var(--pink);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .paw-icon {
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--sage);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: white;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Content */
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .intro-box {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .intro-box p {
+            margin-bottom: 0.5rem;
+            color: var(--medium-gray);
+        }
+
+        .intro-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--sage);
+            display: inline-block;
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: var(--medium-gray);
+        }
+
+        .section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--medium-gray);
+        }
+
+        .section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--medium-gray);
+        }
+
+        .section ol li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--blue);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            color: white;
+        }
+
+        .rights-box {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+        }
+
+        .rights-box ul {
+            margin-bottom: 0;
+        }
+
+        .contact-box {
+            background: var(--pink);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .contact-box h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .contact-box p {
+            color: white;
+        }
+
+        .contact-box a {
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-copyright {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page-header {
+                padding: 2rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .content-container {
+                padding: 2rem 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.25rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a class="logo" href="mypetfriends-carousel.html">
+                <span class="paw-icon">🐾</span>
+                <span class="logo-text">MyPetFriends</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="mypetfriends-carousel.html">Home</a></li>
+                    <li><a href="sitter-signup.html">Become a Sitter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>🛡 Privacy Policy</h1>
+        <p>Last updated: 27 November 2025</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content-container">
+        <div class="intro-box">
+            <p><strong>Company:</strong> PETFRIENDS (Pty) Ltd ("we", "us", "our")</p>
+            <p><strong>Website:</strong> MyPetFriends (the "Site")</p>
+        </div>
+
+        <div class="section">
+            <h2>1. Introduction</h2>
+            <p>PETFRIENDS (Pty) Ltd is committed to protecting your personal information and complying with the Protection of Personal Information Act, 4 of 2013 ("POPIA").</p>
+            <p>This Privacy Policy explains how we collect, use, store, share, and protect your personal information when you use our website or any related services.</p>
+            <p>By using our Site, you consent to the practices described in this Policy.</p>
+        </div>
+
+        <div class="section">
+            <h2>2. What personal information we collect</h2>
+            <p>We collect the following categories of personal information:</p>
+            
+            <h3>2.1 Personal identification details</h3>
+            <ul>
+                <li>Full name</li>
+                <li>Email address</li>
+                <li>Cell phone number</li>
+            </ul>
+
+            <h3>2.2 Profile & experience information (for sitters)</h3>
+            <ul>
+                <li>Years of pet-sitting experience</li>
+                <li>Number of pets owned</li>
+                <li>Number of pets previously cared for</li>
+                <li>Personal biography</li>
+                <li>Personal profile pictures</li>
+                <li>Home suburb</li>
+                <li>Pet-care services offered</li>
+            </ul>
+
+            <h3>2.3 Reviews and ratings</h3>
+            <ul>
+                <li>Written reviews</li>
+                <li>Star ratings</li>
+            </ul>
+
+            <h3>2.4 Booking information (when a booking request is submitted)</h3>
+            <p>When a user submits a booking request, we collect:</p>
+            <ul>
+                <li>Pet owner's full name</li>
+                <li>Pet's name</li>
+                <li>Dates and duration of care needed</li>
+                <li>The user's message to the sitter</li>
+                <li>Any additional instructions or notes</li>
+            </ul>
+            <p>This information is shared only with the sitter selected by the user.</p>
+        </div>
+
+        <div class="section">
+            <h2>3. How we collect information</h2>
+            <p>We collect information when you:</p>
+            <ul>
+                <li>Create a sitter profile</li>
+                <li>Join our waitlist or contact us</li>
+                <li>Submit or respond to a booking request</li>
+                <li>Upload profile details or images</li>
+                <li>Leave a review</li>
+                <li>Interact with our platform</li>
+                <li>Communicate with us via the website, email, or forms</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>4. Why we collect your information (Purpose of processing)</h2>
+            <p>We process personal information to:</p>
+            <ol>
+                <li>Create and display sitter profiles</li>
+                <li>Connect pet owners with pet sitters</li>
+                <li>Facilitate booking requests and scheduling</li>
+                <li>Allow sitters to review and respond to booking requests</li>
+                <li>Enable communication between pet owners and sitters</li>
+                <li>Provide customer support</li>
+                <li>Improve platform functionality and safety</li>
+                <li>Maintain records for operational and security purposes</li>
+                <li>Comply with legal obligations</li>
+            </ol>
+            <div class="highlight-box">
+                <p><strong>We do not sell your personal information.</strong></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>5. Legal basis for processing</h2>
+            <p>Under POPIA, we process your information based on:</p>
+            <ul>
+                <li>Your consent</li>
+                <li>Legitimate business interests (operating a pet-sitting connection platform)</li>
+                <li>Performance of services requested by you</li>
+            </ul>
+            <p>You may withdraw consent at any time.</p>
+        </div>
+
+        <div class="section">
+            <h2>6. Who we share your information with</h2>
+            
+            <h3>6.1 Sitters (for bookings)</h3>
+            <p>If you submit a booking request, your booking details (name, pet name, dates, message) are shared only with the sitter you selected.</p>
+
+            <h3>6.2 Public profile visibility</h3>
+            <p>Sitters' profile information (bio, suburb, photos, experience, services offered) may be visible to pet owners on the Site.</p>
+
+            <h3>6.3 Service providers</h3>
+            <p>We may share information with trusted service providers who assist with:</p>
+            <ul>
+                <li>Website hosting</li>
+                <li>Email notifications</li>
+                <li>Analytics</li>
+                <li>Data storage</li>
+            </ul>
+            <p>All providers are required to comply with POPIA.</p>
+            <p><strong>We do not share your data with advertisers.</strong></p>
+        </div>
+
+        <div class="section">
+            <h2>7. How we store and protect personal information</h2>
+            <p>We implement appropriate technical and organisational safeguards, including:</p>
+            <ul>
+                <li>Secure servers</li>
+                <li>Encrypted connections (HTTPS)</li>
+                <li>Access controls</li>
+                <li>Data minimisation</li>
+                <li>Restricted staff access</li>
+            </ul>
+            <p>Booking information is accessible only to PETFRIENDS administration and the sitter involved.</p>
+            <p>We retain data only as long as necessary for operational, legal, or security reasons.</p>
+        </div>
+
+        <div class="section">
+            <h2>8. Cookies and tracking</h2>
+            <p>The Site may use cookies or analytics tools to improve user experience.</p>
+            <p>No personally identifying information is collected through cookies.</p>
+            <p>You may disable cookies through your browser.</p>
+        </div>
+
+        <div class="section">
+            <h2>9. Children's information</h2>
+            <p>We do not knowingly collect information from anyone under 18.</p>
+            <p>If we become aware that a minor has submitted personal information, we will delete it.</p>
+        </div>
+
+        <div class="section">
+            <h2>10. Your POPIA rights</h2>
+            <p>You have the right to:</p>
+            <div class="rights-box">
+                <ul>
+                    <li>Access your personal information</li>
+                    <li>Correct or update your information</li>
+                    <li>Request deletion</li>
+                    <li>Withdraw consent</li>
+                    <li>Object to processing</li>
+                    <li>Lodge a complaint with the Information Regulator</li>
+                </ul>
+            </div>
+            <p>To exercise these rights, contact us at the email below.</p>
+        </div>
+
+        <div class="section">
+            <h2>11. Updates to this Policy</h2>
+            <p>We may update this Privacy Policy from time to time.</p>
+            <p>Changes will be posted with an updated "Last Revised" date.</p>
+        </div>
+
+        <div class="contact-box">
+            <h3>12. Contact Information</h3>
+            <p>For any privacy-related queries:</p>
+            <p><strong>PETFRIENDS (Pty) Ltd</strong></p>
+            <p>Email: <a href="mailto:britt_432@hotmail.com">britt_432@hotmail.com</a></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">🐾 MyPetFriends</div>
+        <p class="footer-tagline">Building a better way for local pet sitters to connect with pet owners</p>
+        <div class="footer-links">
+            <a href="mypetfriends-carousel.html">Home</a>
+            <a href="sitter-signup.html">Become a Sitter</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+        <p class="footer-copyright">&copy; 2025 MyPetFriends. Made with 💕 in Cape Town.</p>
+    </footer>
+</body>
+</html>
