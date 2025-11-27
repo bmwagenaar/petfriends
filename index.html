@@ -1258,17 +1258,17 @@
             }
 
             .hero {
-                padding: 0.5rem 1rem 1rem;
-                min-height: auto;
+                padding: 1.5rem 1rem 1rem;
+                min-height: calc(100vh - 60px);
             }
 
             .hero h2 {
-                font-size: 1.35rem;
-                margin-bottom: 0.5rem;
+                font-size: 1.75rem;
+                margin-bottom: 1rem;
             }
 
             .search-container {
-                padding: 1rem;
+                padding: 1.25rem;
             }
             
             .search-form {
@@ -1292,12 +1292,12 @@
             }
 
             .carousel-container {
-                margin-top: 1rem;
+                margin-top: 1.5rem;
             }
 
             .carousel-item {
-                width: 60px;
-                height: 60px;
+                width: 130px;
+                height: 130px;
             }
 
             @keyframes scroll {
@@ -1305,32 +1305,28 @@
                     transform: translateX(0);
                 }
                 100% {
-                    transform: translateX(calc(-60px * 9 - 1rem * 9));
+                    transform: translateX(calc(-130px * 9 - 1rem * 9));
                 }
             }
 
             .join-section {
-                padding: 1.25rem 1rem;
+                padding: 3rem 1rem;
             }
 
             .join-title {
-                font-size: 1.1rem;
-                margin-bottom: 0.5rem;
+                font-size: 1.75rem;
             }
 
             .join-description {
-                font-size: 0.8rem;
-                margin-bottom: 0.75rem;
+                font-size: 1rem;
             }
 
             .join-disclaimer {
-                display: none;
+                display: block;
             }
 
             .join-btn {
-                margin-top: 0.75rem;
-                padding: 0.6rem 1.5rem !important;
-                font-size: 0.85rem !important;
+                margin-top: 1rem;
             }
 
             .features-section {
@@ -1338,33 +1334,32 @@
             }
 
             .section-title {
-                font-size: 1.5rem;
-                margin-bottom: 1.25rem;
+                font-size: 1.75rem;
+                margin-bottom: 2rem;
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
-                gap: 0.75rem;
             }
 
             .feature-card {
-                padding: 1.25rem 1rem;
-                border-radius: 15px;
+                padding: 2.5rem;
+                border-radius: 20px;
             }
 
             .feature-icon {
-                font-size: 1.75rem;
-                margin-bottom: 0.5rem;
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
             }
 
             .feature-title {
-                font-size: 1rem;
-                margin-bottom: 0.375rem;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
             }
 
             .feature-description {
-                font-size: 0.8rem;
-                line-height: 1.4;
+                font-size: 1rem;
+                line-height: 1.6;
             }
 
             .results-header {
@@ -1569,12 +1564,12 @@
         /* Small Mobile */
         @media (max-width: 480px) {
             .hero {
-                padding: 0.5rem 0.75rem 1rem;
+                padding: 1rem 0.75rem 0.75rem;
             }
             
             .hero h2 {
-                font-size: 1.35rem;
-                margin-bottom: 0.5rem;
+                font-size: 1.5rem;
+                margin-bottom: 0.875rem;
             }
             
             .search-container {
@@ -1604,24 +1599,16 @@
             }
 
             .join-title {
-                font-size: 1.1rem;
-            }
-
-            .join-description {
-                font-size: 0.8rem;
+                font-size: 1.5rem;
             }
 
             .feature-card {
                 padding: 1.75rem;
             }
 
-            .carousel-container {
-                margin-top: 1rem;
-            }
-
             .carousel-item {
-                width: 60px;
-                height: 60px;
+                width: 110px;
+                height: 110px;
             }
 
             @keyframes scroll {
@@ -1629,7 +1616,7 @@
                     transform: translateX(0);
                 }
                 100% {
-                    transform: translateX(calc(-60px * 9 - 1rem * 9));
+                    transform: translateX(calc(-110px * 9 - 1rem * 9));
                 }
             }
 
@@ -1678,6 +1665,49 @@
                 }
             }
         }
+
+        /* Google Places Autocomplete Styling */
+        .pac-container {
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 15px;
+            border: 2px solid var(--pink);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .pac-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        .pac-item:first-child {
+            border-top: none;
+        }
+
+        .pac-item:hover {
+            background: var(--cream);
+        }
+
+        .pac-item-selected {
+            background: var(--cream);
+        }
+
+        .pac-icon {
+            display: none;
+        }
+
+        .pac-item-query {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .pac-matched {
+            color: var(--pink);
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -1690,7 +1720,7 @@
             </div>
             <nav class="nav-links">
                 <a href="#" onclick="showLanding()">Home</a>
-                <a href="sitter-signup.html">Become a Sitter</a>
+                <a href="sittersignup.html">Become a Sitter</a>
             </nav>
         </div>
     </header>
@@ -1705,11 +1735,7 @@
                     <form class="search-form" onsubmit="return handleSearch(event);">
                         <div class="form-group">
                             <label for="location">📍 Your home suburb <span class="required">*</span></label>
-                            <select id="location" required>
-                                <option value="">Select your area</option>
-                                <option value="blouberg">Blouberg and surrounds, Western Cape</option>
-                                <option value="milnerton">Milnerton, Western Cape</option>
-                            </select>
+                            <input type="text" id="location" placeholder="Start typing your suburb..." required autocomplete="off">
                         </div>
                         
                         <div class="form-group">
@@ -1810,7 +1836,7 @@
                     We're at the very beginning, and we want to build this WITH you, not just FOR you. Join our growing team of local trusted pet sitters.
                 </p>
                 
-                <a href="sitter-signup.html" class="btn-primary join-btn" style="display: inline-block; text-decoration: none;">Sign me up</a>
+                <a href="sittersignup.html" class="btn-primary join-btn" style="display: inline-block; text-decoration: none;">Sign me up</a>
 
                 <p class="join-disclaimer" style="margin-top: 1.5rem;">
                     No spam, we promise. We'll only reach out about joining our community.
@@ -1848,9 +1874,11 @@
             <p class="footer-tagline">Building a better way for local pet sitters to connect with pet owners</p>
             <div class="footer-links">
                 <a href="#" onclick="showLanding()">Home</a>
-                <a href="sitter-signup.html">Become a Sitter</a>
+                <a href="sittersignup.html">Become a Sitter</a>
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
             </div>
-            <p class="footer-copyright">&copy; 2025 MyPetFriends. Made with 💕 in Cape Town.</p>
+            <p class="footer-copyright">&copy; 2025 PETFRIENDS. Made with 💕 in Cape Town.</p>
         </footer>
     </div>
 
@@ -1928,7 +1956,11 @@
         <footer>
             <div class="footer-logo">🐾 MyPetFriends</div>
             <p class="footer-tagline">Building a better way for local pet sitters to connect with pet owners</p>
-            <p class="footer-copyright">&copy; 2025 MyPetFriends. Made with 💕 in Cape Town.</p>
+            <div class="footer-links">
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <p class="footer-copyright">&copy; 2025 PETFRIENDS. Made with 💕 in Cape Town.</p>
         </footer>
     </div>
 
@@ -1945,7 +1977,11 @@
         <footer>
             <div class="footer-logo">🐾 MyPetFriends</div>
             <p class="footer-tagline">Building a better way for local pet sitters to connect with pet owners</p>
-            <p class="footer-copyright">&copy; 2025 MyPetFriends. Made with 💕 in Cape Town.</p>
+            <div class="footer-links">
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <p class="footer-copyright">&copy; 2025 PETFRIENDS. Made with 💕 in Cape Town.</p>
         </footer>
     </div>
 
@@ -2607,6 +2643,31 @@
                 toast.classList.remove('active');
             }, 4000);
         }
+
+        // Google Places Autocomplete
+        function initAutocomplete() {
+            const input = document.getElementById('location');
+            
+            if (!input) return;
+            
+            const options = {
+                componentRestrictions: { country: 'za' },
+                types: ['(regions)']
+            };
+            
+            const autocomplete = new google.maps.places.Autocomplete(input, options);
+            
+            // Store the selected place
+            autocomplete.addListener('place_changed', function() {
+                const place = autocomplete.getPlace();
+                if (place.formatted_address) {
+                    input.value = place.formatted_address;
+                }
+            });
+        }
     </script>
+    
+    <!-- Google Places API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5_DMdzRxsI6yD7eFvlIvf0khTAvu2EFU&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 </html>
