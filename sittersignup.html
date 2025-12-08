@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐾 MyPetFriends - Pet Sitter Signup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pink: #FFB6C1;
+            --blue: #A8D8EA;
+            --sage: #B8D4B8;
+            --yellow: #F4D49E;
+            --cream: #FFF5E6;
+            --dark: #2C2C2C;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--blue);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: #FAFAFA;
+            position: relative;
+            overflow: hidden;
+            padding: 4rem 0;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .hero-text {
+            z-index: 2;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--blue);
+            color: white;
+            padding: 1rem 2.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(168, 216, 234, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 216, 234, 0.4);
+            background: #8FC9DE;
+        }
+
+        /* Carousel Section */
+        .carousel-container {
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 3rem;
+            overflow: hidden;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 1rem;
+            animation: scroll 50s linear infinite;
+        }
+
+        .carousel:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-180px * 10 - 1rem * 10));
+            }
+        }
+
+        .carousel-item {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--cream);
+            padding: 6rem 2rem;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .about-content p {
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .about-content strong {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: #FAFAFA;
+        }
+
+        .features-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-content h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 4rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--blue);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:nth-child(2) {
+            background: var(--sage);
+        }
+
+        .feature-card:nth-child(3) {
+            background: var(--yellow);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feature-card p {
+            color: white;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: var(--cream);
+            padding: 6rem 2rem;
+        }
+
+        .how-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .how-content h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 4rem;
+            color: var(--dark);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--blue);
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .step p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--blue);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section .cta-button {
+            background: white;
+            color: var(--blue);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-section .cta-button:hover {
+            background: var(--cream);
+            color: var(--blue);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Section */
+        .form-section {
+            background: white;
+            padding: 6rem 2rem;
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        .form-section-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-section-content h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .form-section-content > p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 3rem;
+        }
+
+        .custom-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .form-group small {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .required {
+            color: #E74C3C;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="number"],
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--blue);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .checkbox-item input[type="checkbox"],
+        .radio-item input[type="radio"] {
+            margin-top: 0.25rem;
+            cursor: pointer;
+        }
+
+        .checkbox-item label,
+        .radio-item label {
+            cursor: pointer;
+            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .option-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .option-description {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .privacy-link {
+            color: var(--blue);
+            text-decoration: underline;
+        }
+
+        .privacy-link:hover {
+            color: #8FC9DE;
+        }
+
+        .submit-button {
+            background: var(--blue);
+            color: white;
+            padding: 1rem 2rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(168, 216, 234, 0.3);
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 216, 234, 0.4);
+            background: #8FC9DE;
+        }
+
+        .submit-button:disabled {
+            background: #CCCCCC;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message,
+        .error-message {
+            display: none;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .success-message {
+            background: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+
+        .error-message {
+            background: #F8D7DA;
+            color: #721C24;
+            border: 1px solid #F5C6CB;
+        }
+
+        .success-message.show,
+        .error-message.show {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-item {
+                width: 150px;
+                height: 150px;
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-150px * 10 - 1rem * 10));
+                }
+            }
+        }
+    </style>
+    <script>
+        function showForm(event) {
+            event.preventDefault();
+            const formSection = document.getElementById('formSection');
+            formSection.classList.add('active');
+            formSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function submitForm(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('petSitterForm');
+            const submitButton = document.getElementById('submitButton');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Disable submit button
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            // Hide previous messages
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+            
+            try {
+                const formData = new FormData(form);
+                
+                // Google Forms endpoint
+                const googleFormsUrl = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSc3bPQ6kDVxME3JLMvq64uH8xpSWjI3sj-kLT2djRs_3Fqn9g/formResponse';
+                
+                await fetch(googleFormsUrl, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+                
+                // Show success message
+                successMessage.classList.add('show');
+                form.reset();
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.classList.add('show');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit';
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="index.html" class="logo" style="text-decoration: none;">🐾 MyPetFriends</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#signup">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Sign Up to MyPetFriends 🚀</h1>
+                <p>We're building a platform for pet sitters in Cape Town - and we're starting right here in Cape Town! If you offer pet caring services then join our pack and <span style="font-weight: 500;">help us create something better.</span></p>
+                <a href="#" onclick="showForm(event); return false;" class="cta-button">Get Started Today</a>
+            </div>
+
+            <!-- Carousel -->
+            <div class="carousel-container">
+                <div class="carousel">
+                    <!-- First set of images -->
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/6a5043df-105a-466e-92dc-b9080c8c9151.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/20b44c26-dcc3-4a56-a612-6395afef40ff.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/efecb937-f92c-4fda-873b-6498e4630e75.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/4992fa8d-bcf3-4c25-a15a-3b763bc9aa0b.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/062074ee-d6b6-47e8-9e63-0a8ae574bf18.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/d53d9c38-3321-42dc-9d55-b400dfd997cd.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/e073ce70-dd14-4c3b-b272-14a78a2f96ad.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/e3ed2483-0fb4-430a-aebd-dc5ba75c5620.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/9479f055-f5bd-4183-9ca0-ae595ecf466d.png" alt="Pet Friends">
+                    </div>
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/6a5043df-105a-466e-92dc-b9080c8c9151.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/20b44c26-dcc3-4a56-a612-6395afef40ff.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/efecb937-f92c-4fda-873b-6498e4630e75.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/4992fa8d-bcf3-4c25-a15a-3b763bc9aa0b.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/062074ee-d6b6-47e8-9e63-0a8ae574bf18.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/d53d9c38-3321-42dc-9d55-b400dfd997cd.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/e073ce70-dd14-4c3b-b272-14a78a2f96ad.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/e3ed2483-0fb4-430a-aebd-dc5ba75c5620.png" alt="Pet Friends">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://cdn.pet-friends.co.za/images/9479f055-f5bd-4183-9ca0-ae595ecf466d.png" alt="Pet Friends">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>Building Something Better for Pet Sitters</h2>
+            <p>We're in the early stages of creating a local platform where pet owners can find you, see your services and rates, and book the care their pets need. Our goal? Help you get more consistent work, especially during those quieter months.</p>
+            <p><strong>Full transparency:</strong> We're very early. We don't have pet owners on the platform yet, but we're talking to local pet sitters to build something that actually helps.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-content">
+            <h2>What We're Building</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Your Own Profile</h3>
+                    <p>Showcase your services, experience, and what makes you great at what you do. You control your rates and availability.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Local Focus</h3>
+                    <p>Connect with pet owners right in your area - Blouberg, Table View, and surrounding communities.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Year-Round Bookings</h3>
+                    <p>Help fill your calendar during those quieter months when work is harder to come by.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="how-content">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Share Your Info</h3>
+                    <p>Fill out our quick form with your basic details. Takes just a few minutes.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>We'll Connect</h3>
+                    <p>We'll reach out to get more details, photos, and understand what you offer.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Be Ready to Launch</h3>
+                    <p>When we go live and pet owners start searching, you'll already be on the platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="signup">
+        <h2>Ready to Be Part of This?</h2>
+        <p>If more consistent pet sitting work sounds good to you, we'd love to hear from you.</p>
+        <a href="#" onclick="showForm(event); return false;" class="cta-button">Share Your Details</a>
+        <p style="margin-top: 1.5rem; font-size: 1rem;">No cost. No commitment. Just getting ready for launch.</p>
+    </section>
+
+    <!-- Inline Form Section -->
+    <section id="formSection" class="form-section">
+        <div class="form-section-content">
+            <h2>Join MyPetFriends</h2>
+            <p>Share your details and we'll reach out to get you set up on the platform</p>
+            
+            <form class="custom-form" onsubmit="submitForm(event)" id="petSitterForm">
+                <div class="form-group">
+                    <label for="name">Name <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="entry.30342160" 
+                        required 
+                        placeholder="Enter your full name"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="entry.1241496133" 
+                        required 
+                        placeholder="your.email@example.com"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="entry.182122867" 
+                        required 
+                        placeholder="e.g., 082 123 4567"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="suburb">Suburb <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="suburb" 
+                        name="entry.1058618338" 
+                        required 
+                        placeholder="e.g., Table View, Blouberg"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Years of Experience</label>
+                    <small>How many years have you been pet sitting?</small>
+                    <input 
+                        type="number" 
+                        id="experience" 
+                        name="entry.793826802" 
+                        placeholder="e.g., 3"
+                        min="0"
+                        step="0.5"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="daily_rate">Daily Rate (R)</label>
+                    <small>Your typical daily rate in South African Rand</small>
+                    <input 
+                        type="number" 
+                        id="daily_rate" 
+                        name="entry.260334938" 
+                        placeholder="e.g., 250"
+                        min="0"
+                        step="10"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Please select the Pet Care services you offer <span class="required">*</span></label>
+                    <small>Please select the pet care services you offer</small>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service1" name="entry.1897452399" value="Pet Sitting">
+                            <label for="service1">
+                                <span class="option-title">Pet Sitting</span>
+                                <span class="option-description">You stay overnight in the pet's home</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service2" name="entry.1897452399" value="Pet Boarding">
+                            <label for="service2">
+                                <span class="option-title">Pet Boarding</span>
+                                <span class="option-description">Pet stays overnight in your home</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service3" name="entry.1897452399" value="Doggy Daycare">
+                            <label for="service3">
+                                <span class="option-title">Doggy Daycare</span>
+                                <span class="option-description">You let dogs hang out with you during the day but not overnight</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service4" name="entry.1897452399" value="Check-Ins">
+                            <label for="service4">
+                                <span class="option-title">Check-ins</span>
+                                <span class="option-description">You go to the pet's home to check-in during the day but don't stay overnight</span>
+                            </label>
+                        </div>
+                    </div>
+                    <input type="hidden" name="entry.1897452399_sentinel" value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="bio">Please add a short bio (2-3 sentences describing you and your experience) <span class="required">*</span></label>
+                    <small>This helps pet owners get a sense of who you are</small>
+                    <textarea 
+                        id="bio" 
+                        name="entry.1882092252" 
+                        required 
+                        rows="4"
+                        placeholder="An experienced dog walker and pet pal! I've looked after and cuddled more dogs than I can count and will love your pet like my own"
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Do you have references you can share with us? <span class="required">*</span></label>
+                    <small>Anyone you've worked for that can vouch for your awesome service</small>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="ref_yes" name="entry.467087438" value="Yes" required>
+                            <label for="ref_yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="ref_no" name="entry.467087438" value="No" required>
+                            <label for="ref_no">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Consent <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="consent_yes" name="entry.352364997" value="I consent to PETFRIENDS (Pty) Ltd processing my personal information as described in the Privacy Policy." required>
+                            <label for="consent_yes">I consent to PETFRIENDS (Pty) Ltd processing my personal information as described in the <a href="privacy.html" target="_blank" class="privacy-link">Privacy Policy</a>.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button" id="submitButton">
+                    Submit
+                </button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <strong>Thank you so much for your application to be a Pet Friend!</strong><br>
+                Our team is reviewing and will be in touch soon.
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                There was an issue submitting your form. Please try again or contact us directly.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="color: white; margin-bottom: 1rem;">🐾 MyPetFriends</div>
+            <p>Building a better way for local pet sitters to connect with pet owners.</p>
+            <p>Cape Town</p>
+            <p style="margin-top: 2rem; font-size: 0.9rem;">© 2025 PetFriends. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
