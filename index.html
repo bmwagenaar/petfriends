@@ -642,11 +642,13 @@
             font-size: 0.9rem;
             min-width: 180px;
             transition: all 0.3s;
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .suburb-input:focus {
             outline: none;
-            border-color: var(--pink);
+            border-color: #E0E0E0;
         }
 
         .suburb-input::placeholder {
@@ -1951,8 +1953,8 @@
                 <div class="search-container">
                     <form class="search-form" onsubmit="return handleSearch(event);">
                         <div class="form-group">
-                            <label for="location">📍 Your home suburb <span class="required">*</span></label>
-                            <input type="text" id="location" placeholder="Start typing your suburb..." required autocomplete="off">
+                            <label for="location">📍 Your home suburb</label>
+                            <input type="text" id="location" placeholder="All suburbs (or start typing to filter)..." autocomplete="off">
                         </div>
                         
                         <div class="form-group">
@@ -2119,7 +2121,7 @@
             <div class="filter-bar">
                 <div class="filter-group">
                     <span class="filter-icon">📍</span>
-                    <input type="text" id="suburbFilter" class="suburb-input" placeholder="All suburbs..." autocomplete="off">
+                    <input type="text" id="suburbFilter" class="suburb-input" placeholder="All suburbs..." autocomplete="off" readonly title="Suburb filter coming soon">
                 </div>
                 <span class="filter-divider"></span>
                 <div class="filter-group">
@@ -2319,14 +2321,16 @@
             }
             
             // Capture suburb from landing page and pre-fill the filter
+            // NOTE: Suburb filter is displayed but NOT applied - to be implemented later
             const landingSuburbInput = document.getElementById('location');
             if (landingSuburbInput && landingSuburbInput.value) {
-                suburbFilter = landingSuburbInput.value;
-                document.getElementById('suburbFilter').value = suburbFilter;
+                // Show the suburb in the filter input for user reference
+                document.getElementById('suburbFilter').value = landingSuburbInput.value;
             } else {
-                suburbFilter = '';
                 document.getElementById('suburbFilter').value = '';
             }
+            // Always set suburbFilter to empty so it doesn't filter results
+            suburbFilter = '';
             
             // Reset rate filter
             maxRateFilter = 500;
@@ -2454,6 +2458,13 @@
 
         // Filter functions
         function applyFilters() {
+            console.log('Applying filters:', {
+                suburb: suburbFilter,
+                services: selectedServices,
+                maxRate: maxRateFilter,
+                totalSitters: allSitters.length
+            });
+            
             filteredSitters = allSitters.filter(sitter => {
                 // Rate filter
                 const rate = sitter.rates ? parseInt(sitter.rates) : 0;
@@ -2472,13 +2483,17 @@
                 let passesSuburbFilter = true;
                 if (suburbFilter && suburbFilter.trim() !== '') {
                     const sitterLocation = sitter.location ? sitter.location.toLowerCase() : '';
-                    const filterSuburb = suburbFilter.toLowerCase();
+                    // Extract just the first part of the suburb filter (before comma)
+                    // e.g., "Camps Bay, Cape Town, South Africa" -> "camps bay"
+                    const filterSuburb = suburbFilter.split(',')[0].trim().toLowerCase();
                     // Check if the sitter's location contains the filtered suburb
                     passesSuburbFilter = sitterLocation.includes(filterSuburb);
                 }
                 
                 return passesRateFilter && passesServiceFilter && passesSuburbFilter;
             });
+            
+            console.log('Filtered results:', filteredSitters.length, 'sitters');
             displaySitters(filteredSitters);
         }
 
@@ -2586,8 +2601,8 @@
             });
             document.getElementById('serviceDropdownBtn').textContent = 'All Services';
             
-            // Reset suburb filter
-            suburbFilter = '';
+            // Clear suburb filter input (visual only - filter is disabled)
+            suburbFilter = ''; // Always empty (disabled)
             document.getElementById('suburbFilter').value = '';
             
             applyFilters();
@@ -2935,61 +2950,101 @@
 
         // Google Places Autocomplete
         function initAutocomplete() {
+            console.log('Initializing Google Places Autocomplete...');
+            
+            // Check if Google Maps loaded properly
+            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+                console.error('Google Maps JavaScript API failed to load. Check your API key and internet connection.');
+                return;
+            }
+            
+            if (typeof google.maps.places === 'undefined') {
+                console.error('Google Maps Places library failed to load. Check that libraries=places is in the script URL.');
+                return;
+            }
+            
             // Initialize autocomplete for landing page
             const input = document.getElementById('location');
             
             if (input) {
-                const options = {
-                    componentRestrictions: { country: 'za' },
-                    types: ['(regions)']
-                };
-                
-                const autocomplete = new google.maps.places.Autocomplete(input, options);
-                
-                // Store the selected place
-                autocomplete.addListener('place_changed', function() {
-                    const place = autocomplete.getPlace();
-                    if (place.formatted_address) {
-                        input.value = place.formatted_address;
-                    }
-                });
+                try {
+                    const options = {
+                        componentRestrictions: { country: 'za' },
+                        types: ['(regions)']
+                    };
+                    
+                    const autocomplete = new google.maps.places.Autocomplete(input, options);
+                    console.log('Landing page autocomplete initialized successfully');
+                    
+                    // Store the selected place
+                    autocomplete.addListener('place_changed', function() {
+                        const place = autocomplete.getPlace();
+                        if (place.formatted_address) {
+                            input.value = place.formatted_address;
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error initializing landing page autocomplete:', error);
+                }
             }
             
             // Initialize autocomplete for results page suburb filter
             const suburbFilterInput = document.getElementById('suburbFilter');
             
             if (suburbFilterInput) {
-                const filterOptions = {
-                    componentRestrictions: { country: 'za' },
-                    types: ['(regions)']
-                };
-                
-                const filterAutocomplete = new google.maps.places.Autocomplete(suburbFilterInput, filterOptions);
-                
-                // When user selects a place from autocomplete, update filter
-                filterAutocomplete.addListener('place_changed', function() {
-                    const place = filterAutocomplete.getPlace();
-                    if (place.formatted_address) {
-                        suburbFilterInput.value = place.formatted_address;
-                        suburbFilter = place.formatted_address;
-                        applyFilters();
-                    }
-                });
-                
-                // Also apply filter when user types and presses Enter or blurs
-                suburbFilterInput.addEventListener('keyup', function(event) {
-                    if (event.key === 'Enter') {
-                        suburbFilter = this.value;
-                        applyFilters();
-                    }
-                });
-                
-                suburbFilterInput.addEventListener('blur', function() {
-                    suburbFilter = this.value;
-                    applyFilters();
-                });
+                try {
+                    const filterOptions = {
+                        componentRestrictions: { country: 'za' },
+                        types: ['(regions)']
+                    };
+                    
+                    const filterAutocomplete = new google.maps.places.Autocomplete(suburbFilterInput, filterOptions);
+                    console.log('Suburb filter autocomplete initialized successfully');
+                    
+                    // NOTE: Suburb filter events are DISABLED - to be implemented later
+                    // When user selects a place from autocomplete, update filter
+                    // filterAutocomplete.addListener('place_changed', function() {
+                    //     const place = filterAutocomplete.getPlace();
+                    //     if (place.formatted_address) {
+                    //         suburbFilterInput.value = place.formatted_address;
+                    //         suburbFilter = place.formatted_address;
+                    //         applyFilters();
+                    //     }
+                    // });
+                    
+                    // Also apply filter when user types and presses Enter or blurs
+                    // suburbFilterInput.addEventListener('keyup', function(event) {
+                    //     if (event.key === 'Enter') {
+                    //         suburbFilter = this.value;
+                    //         applyFilters();
+                    //     }
+                    // });
+                    
+                    // suburbFilterInput.addEventListener('blur', function() {
+                    //     suburbFilter = this.value;
+                    //     applyFilters();
+                    // });
+                } catch (error) {
+                    console.error('Error initializing suburb filter autocomplete:', error);
+                }
             }
+            
+            console.log('Google Places Autocomplete initialization complete');
         }
+        
+        // Listen for Google Maps API errors
+        window.gm_authFailure = function() {
+            console.error('Google Maps API authentication failed!');
+            console.error('Possible causes:');
+            console.error('1. Invalid API key');
+            console.error('2. Billing not enabled in Google Cloud Console');
+            console.error('3. API restrictions not properly configured');
+            console.error('4. Places API not enabled in your project');
+            console.error('Please check the troubleshooting guide for solutions.');
+            
+            // Show user-friendly message
+            alert('Google Maps autocomplete is currently unavailable. You can still type suburb names manually. Please contact support if this persists.');
+        };
     </script>
     
     <!-- Google Places API -->
