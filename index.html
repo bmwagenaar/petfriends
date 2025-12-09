@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>🐾 MyPetFriends - Building a better way for local pet sitters to connect with pet owners</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+        
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+            position: relative;
         }
 
         :root {
@@ -375,7 +388,6 @@
             border-radius: 20px;
             text-align: center;
             transition: transform 0.3s;
-            box-shadow: var(--shadow-light);
         }
 
         .feature-card:hover {
@@ -464,6 +476,7 @@
             position: relative;
             padding-top: 1.5rem;
             background: transparent;
+            z-index: 100;
         }
 
         .filter-bar {
@@ -474,11 +487,11 @@
             background: white;
             padding: 0.75rem 1.5rem;
             border-radius: 50px;
-            box-shadow: var(--shadow-light);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             gap: 1.25rem;
-            z-index: 10;
+            z-index: 200;
         }
 
         .filter-group {
@@ -508,6 +521,7 @@
         /* Service Dropdown with Checkboxes */
         .service-dropdown {
             position: relative;
+            z-index: 300;
         }
 
         .service-dropdown-btn {
@@ -539,10 +553,10 @@
             left: 0;
             background: white;
             border-radius: 15px;
-            box-shadow: var(--shadow-light);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             padding: 0.75rem 0;
             min-width: 180px;
-            z-index: 100;
+            z-index: 2000;
         }
 
         .service-dropdown-menu.active {
@@ -628,6 +642,30 @@
             color: var(--pink);
         }
 
+        /* Suburb Filter Input */
+        .suburb-input {
+            background: white;
+            border: 2px solid #E0E0E0;
+            padding: 0.625rem 1rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            min-width: 180px;
+            transition: all 0.3s;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .suburb-input:focus {
+            outline: none;
+            border-color: #E0E0E0;
+        }
+
+        .suburb-input::placeholder {
+            color: var(--light-gray);
+        }
+
         /* Responsive filter */
         @media (max-width: 768px) {
             .filter-bar {
@@ -635,17 +673,20 @@
                 top: 0;
                 transform: none;
                 left: 0;
-                margin: 0 1rem;
+                margin: 0 0.5rem;
                 border-radius: 15px;
-                padding: 1rem;
+                padding: 0.75rem;
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 1rem;
+                gap: 0.75rem;
+                max-width: calc(100% - 1rem);
+                box-sizing: border-box;
             }
 
             .filter-section {
                 padding: 1rem 0;
                 background: #f9f9f9;
+                overflow-x: hidden;
             }
 
             .filter-divider {
@@ -653,7 +694,11 @@
             }
 
             .rate-slider {
-                width: 100px;
+                width: 80px;
+            }
+            
+            .filter-group {
+                max-width: 100%;
             }
         }
 
@@ -689,16 +734,20 @@
             background: var(--white);
             padding: 3rem 2rem;
             border-bottom: 1px solid #E0E0E0;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .results-header-content {
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .results-header h2 {
             color: var(--dark-gray);
-            font-size: 2.5rem;
+            font-size: 1.75rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
@@ -712,12 +761,23 @@
             max-width: 1200px;
             margin: 3rem auto;
             padding: 0 2rem;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .sitter-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
+        }
+
+        /* Force single column on smaller screens to prevent overflow */
+        @media (max-width: 768px) {
+            .sitter-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0;
+            }
         }
 
         .sitter-card {
@@ -809,6 +869,8 @@
             font-size: 0.85rem;
             font-weight: 500;
             transition: all 0.3s;
+            cursor: pointer;
+            user-select: none;
         }
 
         .detail-tag:hover {
@@ -817,11 +879,30 @@
             transform: translateY(-2px);
         }
 
+        .detail-tag.active {
+            background: var(--pink);
+            color: white;
+            border: 2px solid var(--pink-hover);
+            font-weight: 600;
+        }
+
         .sitter-rate {
             color: var(--dark-gray);
             font-weight: 700;
             font-size: 1.25rem;
             font-family: 'Poppins', sans-serif;
+        }
+
+        .sitter-bio {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.5;
         }
 
         /* Profile Page */
@@ -1190,7 +1271,7 @@
         }
 
         .beta-banner {
-            background: linear-gradient(135deg, #B8D4B8 0%, #9DB89D 100%);
+            background: linear-gradient(135deg, #D4A5D4 0%, #C18FC1 100%);
             color: white;
             padding: 2rem 2.5rem;
             text-align: center;
@@ -1202,9 +1283,8 @@
 
         .beta-icon {
             font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: inline-block;
-            animation: pulse 2s infinite;
+            display: inline;
+            margin-right: 0.5rem;
         }
 
         @keyframes pulse {
@@ -1217,6 +1297,7 @@
             font-weight: 700;
             margin-bottom: 15px;
             font-family: 'Poppins', sans-serif;
+            display: inline;
         }
 
         .beta-text {
@@ -1224,7 +1305,7 @@
             line-height: 1.7;
             font-weight: 500;
             max-width: 850px;
-            margin: 0 auto;
+            margin: 15px auto 0;
         }
 
         /* Utilities */
@@ -1605,28 +1686,6 @@
                 flex-direction: column;
                 gap: 1rem;
             }
-
-            /* Beta Banner Mobile */
-            .beta-banner-section {
-                padding: 2rem 1rem;
-            }
-
-            .beta-banner {
-                padding: 1.75rem 1.5rem;
-                border-radius: 15px;
-            }
-
-            .beta-icon {
-                font-size: 2rem;
-            }
-
-            .beta-title {
-                font-size: 1.3rem;
-            }
-
-            .beta-text {
-                font-size: 0.9rem;
-            }
         }
 
         /* Small Mobile */
@@ -1711,23 +1770,6 @@
                 width: 160px;
                 height: 160px;
             }
-
-            /* Beta Banner Small Mobile */
-            .beta-banner {
-                padding: 1.5rem 1.25rem;
-            }
-
-            .beta-icon {
-                font-size: 1.8rem;
-            }
-
-            .beta-title {
-                font-size: 1.2rem;
-            }
-
-            .beta-text {
-                font-size: 0.85rem;
-            }
         }
         
         /* Extra Small Mobile */
@@ -1748,6 +1790,311 @@
                 100% {
                     transform: translateX(calc(-90px * 9 - 1rem * 9));
                 }
+            }
+        }
+
+        /* Additional Mobile Fixes */
+        @media (max-width: 768px) {
+            * {
+                max-width: 100%;
+            }
+            
+            body {
+                overflow-x: hidden !important;
+            }
+            
+            #resultsPage {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+            
+            /* Header responsive */
+            header {
+                padding: 1rem;
+                width: 100%;
+            }
+
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            /* Hero section responsive */
+            .hero {
+                padding: 1.5rem 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            /* Search container responsive */
+            .search-container {
+                padding: 1.5rem 1rem;
+            }
+
+            /* Filter section responsive */
+            .filter-section {
+                overflow-x: hidden;
+            }
+
+            .filter-group {
+                flex-wrap: wrap;
+            }
+
+            .suburb-input {
+                min-width: 140px;
+                max-width: 100%;
+                font-size: 0.85rem;
+            }
+
+            .service-dropdown-btn {
+                font-size: 0.75rem;
+                min-width: 90px;
+                padding: 0.4rem 1.5rem 0.4rem 0.65rem;
+            }
+
+            .filter-label {
+                font-size: 0.75rem;
+            }
+
+            .rate-display {
+                font-size: 0.75rem;
+            }
+
+            /* Results container responsive */
+            .results-container {
+                padding: 1rem;
+                margin: 0;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .results-header {
+                padding: 1.5rem 1rem;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            .results-header-content {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            .results-header h2 {
+                font-size: 1.5rem;
+                word-wrap: break-word;
+            }
+
+            .results-count {
+                font-size: 1rem;
+                word-wrap: break-word;
+            }
+
+            /* Sitter cards responsive */
+            .sitter-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .sitter-card {
+                max-width: 100%;
+                width: 100%;
+                margin: 0;
+                overflow: hidden;
+            }
+
+            .sitter-info {
+                padding: 1.25rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            .sitter-name {
+                word-wrap: break-word;
+                font-size: 1.4rem;
+            }
+            
+            .sitter-location {
+                word-wrap: break-word;
+                font-size: 0.9rem;
+            }
+            
+            .sitter-details {
+                width: 100%;
+                overflow: hidden;
+            }
+            
+            .detail-tag {
+                max-width: calc(50% - 0.5rem);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            /* Sitter bio - show 4 lines on mobile */
+            .sitter-bio {
+                -webkit-line-clamp: 4;
+                word-wrap: break-word;
+            }
+
+            /* Profile page responsive */
+            .profile-container {
+                padding: 1rem;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            /* Modal responsive */
+            .modal-content {
+                width: 95%;
+                max-width: 100%;
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            /* Join section responsive */
+            .join-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .join-title {
+                font-size: 1.75rem;
+            }
+
+            /* Features section responsive */
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Footer responsive */
+            footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            /* Beta Banner Mobile */
+            .beta-banner-section {
+                padding: 2rem 1rem;
+            }
+
+            .beta-banner {
+                padding: 1.75rem 1.5rem;
+                border-radius: 15px;
+            }
+
+            .beta-icon {
+                font-size: 2rem;
+            }
+
+            .beta-title {
+                font-size: 1.3rem;
+            }
+
+            .beta-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Small mobile additional fixes */
+        @media (max-width: 480px) {
+            body {
+                min-width: 100%;
+            }
+            
+            .hero h2 {
+                font-size: 1.75rem;
+            }
+
+            .filter-bar {
+                margin: 0 0.25rem;
+                padding: 0.5rem;
+                gap: 0.5rem;
+                max-width: calc(100% - 0.5rem);
+            }
+
+            .suburb-input {
+                min-width: 100px;
+                font-size: 0.8rem;
+                padding: 0.5rem 0.75rem;
+            }
+            
+            .service-dropdown-btn {
+                min-width: 80px;
+                font-size: 0.7rem;
+            }
+
+            .filter-group {
+                width: 100%;
+                justify-content: center;
+                max-width: 100%;
+            }
+
+            .results-header h2 {
+                font-size: 1.25rem;
+            }
+            
+            .results-container {
+                padding: 0.5rem;
+            }
+
+            .sitter-card {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .sitter-name {
+                font-size: 1.3rem;
+            }
+
+            .detail-tag {
+                font-size: 0.75rem;
+                padding: 0.35rem 0.7rem;
+            }
+            
+            .rate-slider {
+                width: 60px;
+            }
+            
+            .filter-label {
+                font-size: 0.7rem;
+            }
+
+            /* Beta Banner Small Mobile */
+            .beta-banner {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .beta-icon {
+                font-size: 1.8rem;
+            }
+
+            .beta-title {
+                font-size: 1.2rem;
+            }
+
+            .beta-text {
+                font-size: 0.85rem;
             }
         }
 
@@ -1819,8 +2166,8 @@
                 <div class="search-container">
                     <form class="search-form" onsubmit="return handleSearch(event);">
                         <div class="form-group">
-                            <label for="location">📍 Your home suburb <span class="required">*</span></label>
-                            <input type="text" id="location" placeholder="Start typing your suburb..." required autocomplete="off">
+                            <label for="location">📍 Your home suburb</label>
+                            <input type="text" id="location" placeholder="All suburbs (or start typing to filter)..." autocomplete="off">
                         </div>
                         
                         <div class="form-group">
@@ -1957,8 +2304,9 @@
         <!-- Beta Banner Section -->
         <div class="beta-banner-section">
             <div class="beta-banner">
-                <div class="beta-icon">🌟</div>
-                <div class="beta-title">We're in Beta!</div>
+                <div class="beta-title">
+                    <span class="beta-icon">🌟</span>We're in Beta!
+                </div>
                 <div class="beta-text">
                     MyPetFriends is free while we validate our service with the community. In future we may move to a paid model, but don't worry we'll keep our users fully updated in advance before making any changes!
                 </div>
@@ -1989,13 +2337,18 @@
         <div class="results-header">
             <div class="results-header-content">
                 <a class="back-btn" onclick="showLanding()">← Back to search</a>
-                <h2>Great news! We found some amazing sitters</h2>
+                <h2 id="resultsTitle">Great news! We found some amazing sitters</h2>
                 <p class="results-count" id="resultsCount">Loading pet lovers near you...</p>
             </div>
         </div>
 
         <div class="filter-section">
             <div class="filter-bar">
+                <div class="filter-group">
+                    <span class="filter-icon">📍</span>
+                    <input type="text" id="suburbFilter" class="suburb-input" placeholder="All suburbs..." autocomplete="off" readonly title="Suburb filter coming soon">
+                </div>
+                <span class="filter-divider"></span>
                 <div class="filter-group">
                     <span class="filter-icon">🏠</span>
                     <div class="service-dropdown">
@@ -2049,6 +2402,18 @@
             </div>
         </div>
 
+        <!-- Beta Banner Section -->
+        <div class="beta-banner-section">
+            <div class="beta-banner">
+                <div class="beta-title">
+                    <span class="beta-icon">🌟</span>We're in Beta!
+                </div>
+                <div class="beta-text">
+                    MyPetFriends is free while we validate our service with the community. In future we may move to a paid model, but don't worry we'll keep our users fully updated in advance before making any changes!
+                </div>
+            </div>
+        </div>
+
         <footer>
             <div class="footer-logo">🐾 MyPetFriends</div>
             <p class="footer-tagline">Building a better way for local pet sitters to connect with pet owners</p>
@@ -2067,6 +2432,18 @@
             
             <div id="profileContent">
                 <!-- Profile content will be injected here -->
+            </div>
+        </div>
+
+        <!-- Beta Banner Section -->
+        <div class="beta-banner-section">
+            <div class="beta-banner">
+                <div class="beta-title">
+                    <span class="beta-icon">🌟</span>We're in Beta!
+                </div>
+                <div class="beta-text">
+                    MyPetFriends is free while we validate our service with the community. In future we may move to a paid model, but don't worry we'll keep our users fully updated in advance before making any changes!
+                </div>
             </div>
         </div>
 
@@ -2142,6 +2519,7 @@
         let currentSitter = null;
         let maxRateFilter = 500;
         let selectedServices = ['all'];
+        let suburbFilter = ''; // Empty means show all suburbs
 
         // Load sitters from Google Sheet
         async function loadSitters() {
@@ -2190,6 +2568,18 @@
             if (allSitters.length === 0) {
                 await loadSitters();
             }
+            
+            // Capture suburb from landing page and pre-fill the filter
+            // NOTE: Suburb filter is displayed but NOT applied - to be implemented later
+            const landingSuburbInput = document.getElementById('location');
+            if (landingSuburbInput && landingSuburbInput.value) {
+                // Show the suburb in the filter input for user reference
+                document.getElementById('suburbFilter').value = landingSuburbInput.value;
+            } else {
+                document.getElementById('suburbFilter').value = '';
+            }
+            // Always set suburbFilter to empty so it doesn't filter results
+            suburbFilter = '';
             
             // Reset rate filter
             maxRateFilter = 500;
@@ -2260,21 +2650,27 @@
         function displaySitters(sitters) {
             const grid = document.getElementById('sitterGrid');
             const count = document.getElementById('resultsCount');
+            const title = document.getElementById('resultsTitle');
             
             if (!sitters || sitters.length === 0) {
-                grid.innerHTML = '<div class="loading">No sitters found yet. Please add sitters to your Google Sheet!</div>';
+                grid.innerHTML = '<div class="loading">Try changing your filters to find nearby pet friends</div>';
                 count.textContent = 'No sitters available yet';
+                title.textContent = 'Oh no, we weren\'t able to find sitters matching your search 😞';
                 return;
             }
             
+            title.textContent = 'Great news! We found some amazing sitters';
             count.textContent = `We found ${sitters.length} amazing ${sitters.length === 1 ? 'human' : 'humans'} who speak fluent "woof" and "meow"`;
             
             grid.innerHTML = sitters.map((sitter, index) => {
                 // Handle services - split by comma if it exists
                 const services = sitter.services ? sitter.services.toString().split(',').map(s => s.trim()) : [];
-                const servicesTags = services.slice(0, 4).map(service => 
-                    `<span class="detail-tag">${getServiceEmoji(service)} ${service}</span>`
-                ).join('');
+                const servicesTags = services.slice(0, 4).map(service => {
+                    const serviceLower = service.toLowerCase();
+                    const isActive = selectedServices.includes(serviceLower) && !selectedServices.includes('all');
+                    return `<span class="detail-tag ${isActive ? 'active' : ''}" 
+                                  onclick="handleServicePillClick(event, '${serviceLower}')">${getServiceEmoji(service)} ${service}</span>`;
+                }).join('');
                 
                 // Use profile photo if available, otherwise use emoji
                 const imageContent = sitter.profilePhoto && sitter.profilePhoto.trim() !== '' ? 
@@ -2301,7 +2697,7 @@
                             <div class="sitter-details">
                                 ${servicesTags}
                             </div>
-                            <p style="color: var(--medium-gray); font-size: 0.95rem; margin-bottom: 1rem;">${displayBio}</p>
+                            <p class="sitter-bio">${displayBio}</p>
                             <div class="sitter-rate">${displayRates}</div>
                         </div>
                     </div>
@@ -2311,6 +2707,13 @@
 
         // Filter functions
         function applyFilters() {
+            console.log('Applying filters:', {
+                suburb: suburbFilter,
+                services: selectedServices,
+                maxRate: maxRateFilter,
+                totalSitters: allSitters.length
+            });
+            
             filteredSitters = allSitters.filter(sitter => {
                 // Rate filter
                 const rate = sitter.rates ? parseInt(sitter.rates) : 0;
@@ -2325,8 +2728,21 @@
                     );
                 }
                 
-                return passesRateFilter && passesServiceFilter;
+                // Suburb filter - if empty, show all suburbs
+                let passesSuburbFilter = true;
+                if (suburbFilter && suburbFilter.trim() !== '') {
+                    const sitterLocation = sitter.location ? sitter.location.toLowerCase() : '';
+                    // Extract just the first part of the suburb filter (before comma)
+                    // e.g., "Camps Bay, Cape Town, South Africa" -> "camps bay"
+                    const filterSuburb = suburbFilter.split(',')[0].trim().toLowerCase();
+                    // Check if the sitter's location contains the filtered suburb
+                    passesSuburbFilter = sitterLocation.includes(filterSuburb);
+                }
+                
+                return passesRateFilter && passesServiceFilter && passesSuburbFilter;
             });
+            
+            console.log('Filtered results:', filteredSitters.length, 'sitters');
             displaySitters(filteredSitters);
         }
 
@@ -2372,6 +2788,43 @@
             applyFilters();
         }
 
+        // Handle clicks on service pills in sitter cards
+        function handleServicePillClick(event, service) {
+            // Stop the card click from triggering
+            event.stopPropagation();
+            
+            const checkboxes = document.querySelectorAll('#serviceDropdownMenu input[type="checkbox"]');
+            const allCheckbox = document.querySelector('#serviceDropdownMenu input[value="all"]');
+            const serviceCheckbox = document.querySelector(`#serviceDropdownMenu input[value="${service}"]`);
+            
+            // If currently on "All Services", switch to just this service
+            if (selectedServices.includes('all')) {
+                selectedServices = [service];
+                checkboxes.forEach(cb => cb.checked = false);
+                if (serviceCheckbox) serviceCheckbox.checked = true;
+            } 
+            // If this service is already selected, toggle it off
+            else if (selectedServices.includes(service)) {
+                selectedServices = selectedServices.filter(s => s !== service);
+                if (serviceCheckbox) serviceCheckbox.checked = false;
+                
+                // If no services left, go back to "All"
+                if (selectedServices.length === 0) {
+                    selectedServices = ['all'];
+                    allCheckbox.checked = true;
+                }
+            }
+            // Add this service to the selection (OR logic)
+            else {
+                selectedServices.push(service);
+                if (serviceCheckbox) serviceCheckbox.checked = true;
+            }
+            
+            // Update UI and apply filters
+            updateServiceButtonText();
+            applyFilters();
+        }
+
         function updateServiceButtonText() {
             const btn = document.getElementById('serviceDropdownBtn');
             if (selectedServices.includes('all')) {
@@ -2396,6 +2849,10 @@
                 cb.checked = cb.value === 'all';
             });
             document.getElementById('serviceDropdownBtn').textContent = 'All Services';
+            
+            // Clear suburb filter input (visual only - filter is disabled)
+            suburbFilter = ''; // Always empty (disabled)
+            document.getElementById('suburbFilter').value = '';
             
             applyFilters();
         }
@@ -2742,25 +3199,101 @@
 
         // Google Places Autocomplete
         function initAutocomplete() {
+            console.log('Initializing Google Places Autocomplete...');
+            
+            // Check if Google Maps loaded properly
+            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+                console.error('Google Maps JavaScript API failed to load. Check your API key and internet connection.');
+                return;
+            }
+            
+            if (typeof google.maps.places === 'undefined') {
+                console.error('Google Maps Places library failed to load. Check that libraries=places is in the script URL.');
+                return;
+            }
+            
+            // Initialize autocomplete for landing page
             const input = document.getElementById('location');
             
-            if (!input) return;
-            
-            const options = {
-                componentRestrictions: { country: 'za' },
-                types: ['(regions)']
-            };
-            
-            const autocomplete = new google.maps.places.Autocomplete(input, options);
-            
-            // Store the selected place
-            autocomplete.addListener('place_changed', function() {
-                const place = autocomplete.getPlace();
-                if (place.formatted_address) {
-                    input.value = place.formatted_address;
+            if (input) {
+                try {
+                    const options = {
+                        componentRestrictions: { country: 'za' },
+                        types: ['(regions)']
+                    };
+                    
+                    const autocomplete = new google.maps.places.Autocomplete(input, options);
+                    console.log('Landing page autocomplete initialized successfully');
+                    
+                    // Store the selected place
+                    autocomplete.addListener('place_changed', function() {
+                        const place = autocomplete.getPlace();
+                        if (place.formatted_address) {
+                            input.value = place.formatted_address;
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error initializing landing page autocomplete:', error);
                 }
-            });
+            }
+            
+            // Initialize autocomplete for results page suburb filter
+            const suburbFilterInput = document.getElementById('suburbFilter');
+            
+            if (suburbFilterInput) {
+                try {
+                    const filterOptions = {
+                        componentRestrictions: { country: 'za' },
+                        types: ['(regions)']
+                    };
+                    
+                    const filterAutocomplete = new google.maps.places.Autocomplete(suburbFilterInput, filterOptions);
+                    console.log('Suburb filter autocomplete initialized successfully');
+                    
+                    // NOTE: Suburb filter events are DISABLED - to be implemented later
+                    // When user selects a place from autocomplete, update filter
+                    // filterAutocomplete.addListener('place_changed', function() {
+                    //     const place = filterAutocomplete.getPlace();
+                    //     if (place.formatted_address) {
+                    //         suburbFilterInput.value = place.formatted_address;
+                    //         suburbFilter = place.formatted_address;
+                    //         applyFilters();
+                    //     }
+                    // });
+                    
+                    // Also apply filter when user types and presses Enter or blurs
+                    // suburbFilterInput.addEventListener('keyup', function(event) {
+                    //     if (event.key === 'Enter') {
+                    //         suburbFilter = this.value;
+                    //         applyFilters();
+                    //     }
+                    // });
+                    
+                    // suburbFilterInput.addEventListener('blur', function() {
+                    //     suburbFilter = this.value;
+                    //     applyFilters();
+                    // });
+                } catch (error) {
+                    console.error('Error initializing suburb filter autocomplete:', error);
+                }
+            }
+            
+            console.log('Google Places Autocomplete initialization complete');
         }
+        
+        // Listen for Google Maps API errors
+        window.gm_authFailure = function() {
+            console.error('Google Maps API authentication failed!');
+            console.error('Possible causes:');
+            console.error('1. Invalid API key');
+            console.error('2. Billing not enabled in Google Cloud Console');
+            console.error('3. API restrictions not properly configured');
+            console.error('4. Places API not enabled in your project');
+            console.error('Please check the troubleshooting guide for solutions.');
+            
+            // Show user-friendly message
+            alert('Google Maps autocomplete is currently unavailable. You can still type suburb names manually. Please contact support if this persists.');
+        };
     </script>
     
     <!-- Google Places API -->
